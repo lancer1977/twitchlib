@@ -13,10 +13,6 @@ public class TwitchAuthenticator : ITwitchAuthenticator
         _log = log;
     }
 
-    /// <summary>
-    /// Generates the authorization URL for the user to log in, was issues with missing whisper scopes so manually added them
-    /// </summary>
-    /// <returns></returns>
     public string GetAuthorizationUrl()
     {
         //state: _state,
@@ -25,11 +21,6 @@ public class TwitchAuthenticator : ITwitchAuthenticator
         return code;
     }
 
-    /// <summary>
-    /// Callback endpoint for the user to return to after logging in
-    /// </summary>
-    /// <param name="code"></param>
-    /// <returns></returns>
     public async Task<AuthCodeResponse> ProcessCallback(string code)
     {
         try
@@ -45,10 +36,6 @@ public class TwitchAuthenticator : ITwitchAuthenticator
         }
     }
 
-    /// <summary>
-    /// Gets the user information for the authenticated user
-    /// </summary>
-    /// <returns></returns>
     public async Task<User> GetUser()
     {
         var result = await _api.Helix.Users.GetUsersAsync();

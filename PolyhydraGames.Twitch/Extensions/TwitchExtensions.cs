@@ -60,19 +60,19 @@ public static class TwitchExtensions
     /// <param name="addHandler"></param>
     /// <param name="removeHandler"></param>
     /// <returns></returns>
-    //public static IObservable<T> FromAsyncEventPattern<T>(Action<AsyncEventHandler<T>> addHandler, Action<AsyncEventHandler<T>> removeHandler)
-    //{
-    //    var sub = new Subject<T>();
-    //    AsyncEventHandler<T> handler = async (sender, args) =>
-    //    {
-    //        sub.OnNext(args);
-    //        //return Task.CompletedTask;
-    //    };
+    public static IObservable<T> FromEventPattern<T>(Action<AsyncEventHandler<T>> addHandler, Action<AsyncEventHandler<T>> removeHandler)
+    {
+        var sub = new Subject<T>();
+        AsyncEventHandler<T> handler = async (sender, args) =>
+        {
+            sub.OnNext(args);
+            //return Task.CompletedTask;
+        };
 
-    //    addHandler(handler);
-    //    var unsubscribe = new Action(() => removeHandler(handler));
-    //    return sub.Finally(unsubscribe);
-    //}
+        addHandler(handler);
+        var unsubscribe = new Action(() => removeHandler(handler));
+        return sub.Finally(unsubscribe);
+    }
 
     public static ITwitchUpdate ToJoinUpdate(this OnUserJoinedArgs args)
     {
@@ -80,7 +80,6 @@ public static class TwitchExtensions
         {
             ChannelTarget = args.Channel,
             Name = args.Username,
-            IsOnline = true
 
         };
     }
@@ -90,8 +89,7 @@ public static class TwitchExtensions
         return new TwitchUpdate()
         {
             ChannelTarget = args.Channel,
-            Name = args.Username,
-            IsOnline = false
+            Name = args.Username
         };
     }
     public static ITwitchUpdate ToUpdate(this ChatMessage message)
@@ -106,14 +104,18 @@ public static class TwitchExtensions
             Name = message.Username,
             ChannelTarget = message.Channel,
             Id = result == 0 ? null : result,
-            //IsFollower = message.IsFollower,
-            IsOnline = true,
+
         };
     }
 
- 
- 
-
+    public static ITwitchUpdate ToUpdate(this TwitchMessage message)
+    {
+        return new TwitchUpdate
+        {
+            Name = message.UserName,
+            ChannelTarget = message.ChannelName
+        };
+    }
     public static string ToConsoleFormat(this WhisperMessage message)
     {
         return $"*W* {message.Username}:{message.Message}";

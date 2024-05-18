@@ -147,7 +147,7 @@ public class IgdbClient : IGameUpdater
 
     public async Task<IgdbGame> GetGame(string name, string platform)
     {
-        return await _cache.Get($"IgdbGame{name}{platform}", async () =>
+        return await _cache.Get<IgdbGame>($"IgdbGame{name}{platform}", async () =>
         {
             var igdbgames = await GetRawGames(name, platform);
             var game = igdbgames.MinBy(s => s.name.LevenshteinDistance(name));
@@ -184,12 +184,12 @@ public class IgdbClient : IGameUpdater
             game.Year = result.FirstReleaseDate.Date.Year;
             if (string.IsNullOrEmpty(game.ImageUrl))
             {
-                game.ImageUrl = result.cover?.url ?? "";
+                game.ImageUrl = result.cover.url ?? "";
                 if (game.ImageUrl.StartsWith("//"))
                     game.ImageUrl = "https:" + game.ImageUrl;
             }
 
-            game.Developer = result.involved_companies?.FirstOrDefault(x => x.developer)?.Name;
+            game.Developer = result.involved_companies.FirstOrDefault(x => x.developer)?.Name;
         }
         catch (Exception ex)
         {

@@ -1,7 +1,7 @@
 ﻿using System.Reactive.Linq;
 using PolyhydraGames.Twitch.Extensions;
 using TwitchLib.Client;
-using TwitchLib.Client.Events;
+using TwitchLib.Client.Events; 
 
 namespace PolyhydraGames.Twitch.Services
 {
@@ -12,57 +12,78 @@ namespace PolyhydraGames.Twitch.Services
     {
         public ObservableTwitchChatService(ILoggerFactory factory, TwitchClient client)
         {
-            ILogger logger = factory.CreateLogger(typeof(ObservableTwitchChatService));
+            ILogger logger = factory.CreateLogger(typeof(ObservableTwitchChatService)); 
 
             _client = client;// new TwitchClient(customClient,loggerFactory: factory);
-            OnAnnouncement = Observable.FromEventPattern<OnAnnouncementArgs>(_client, nameof(TwitchClient.OnAnnouncement))
-                .Do(x => logger.LogTrace(nameof(OnAnnouncement)))
-                .Select(x => x.EventArgs)
+            OnAnnouncement = TwitchExtensions.FromEventPattern<OnAnnouncementArgs>(
+                    handler => _client.OnAnnouncement += handler,
+                    handler => _client.OnAnnouncement -= handler
+                ).Do(x => logger.LogTrace(nameof(OnAnnouncement)))
+                .Select(x => x)
                 .Where(x => x != null);
-
             _client.OnConnectionError += async (sender, args) =>
             {
                 logger.LogInformation(args.Error.Message + " " + args.BotUsername);
                 await Task.CompletedTask;
             };
 
-
-            OnConnected = Observable.FromEventPattern<OnConnectedArgs>(_client, nameof(TwitchClient.OnConnected))
+            _client.OnConnected += (sender, args) =>
+            {
+                logger.LogInformation(nameof(OnConnected) + " " +  args.BotUsername);
+                return Task.CompletedTask;
+            };
+            OnConnected = TwitchExtensions.FromEventPattern<OnConnectedEventArgs>(
+                    handler => _client.OnConnected += handler,
+                    handler => _client.OnConnected -= handler
+                )
                 .Do(x => logger.LogInformation(nameof(OnConnected)))
-                .Select(x => x.EventArgs)
                 .Where(x => x != null);
 
-            OnJoinedChannel = Observable.FromEventPattern<OnJoinedChannelArgs>(_client, nameof(TwitchClient.OnJoinedChannel))
+            OnJoinedChannel = TwitchExtensions.FromEventPattern<OnJoinedChannelArgs>(
+                    handler => _client.OnJoinedChannel += handler,
+                    handler => _client.OnJoinedChannel -= handler
+                )
                 .Do(x => logger.LogInformation(nameof(OnJoinedChannel)))
-                .Select(x => x.EventArgs)
                 .Where(x => x != null);
 
-            OnMessageReceived = Observable.FromEventPattern<OnMessageReceivedArgs>(_client, nameof(TwitchClient.OnMessageReceived))
-                .Select(x => x.EventArgs)
+            OnMessageReceived = TwitchExtensions.FromEventPattern<OnMessageReceivedArgs>
+                (
+                    handler => _client.OnMessageReceived += handler,
+                    handler => _client.OnMessageReceived -= handler
+                )
                 .Do(x =>
                 {
                     logger.LogTrace(nameof(OnMessageReceived) + x.ChatMessage.RoomId + ": " + x.ChatMessage.Username);
                 })
                 .Where(x => x != null);
 
-            OnWhisperReceived = Observable.FromEventPattern<OnWhisperReceivedArgs>(_client, nameof(TwitchClient.OnWhisperReceived))
-                .Select(x => x.EventArgs)
+            OnWhisperReceived = TwitchExtensions
+                .FromEventPattern<OnWhisperReceivedArgs>(
+                    handler => _client.OnWhisperReceived += handler,
+                    handler => _client.OnWhisperReceived -= handler
+                )
                 .Do(x => logger.LogTrace(nameof(OnWhisperReceived) + ":" + x.WhisperMessage.ToConsoleFormat()))
                 .Where(x => x != null);
 
-            OnNewSubscriber = Observable.FromEventPattern<OnNewSubscriberArgs>(_client, nameof(TwitchClient.OnNewSubscriber))
+            OnNewSubscriber = TwitchExtensions.FromEventPattern<OnNewSubscriberArgs>(
+                    handler => _client.OnNewSubscriber += handler,
+                    handler => _client.OnNewSubscriber -= handler
+                )
                 .Do(x => logger.LogTrace(nameof(OnNewSubscriber)))
-                .Select(x => x.EventArgs)
                 .Where(x => x != null);
 
-            OnUserJoined = Observable.FromEventPattern<OnUserJoinedArgs>(_client, nameof(TwitchClient.OnUserJoined))
+            OnUserJoined = TwitchExtensions.FromEventPattern<OnUserJoinedArgs>(
+                    handler => _client.OnUserJoined += handler,
+                    handler => _client.OnUserJoined -= handler
+                )
                 .Do(x => logger.LogInformation(nameof(OnUserJoined)))
-                .Select(x => x.EventArgs)
                 .Where(x => x != null);
 
-            OnUserLeft = Observable.FromEventPattern<OnUserLeftArgs>(_client, nameof(TwitchClient.OnUserLeft))
+            OnUserLeft = TwitchExtensions.FromEventPattern<OnUserLeftArgs>(
+                    handler => _client.OnUserLeft += handler,
+                    handler => _client.OnUserLeft -= handler
+                )
                 .Do(x => logger.LogInformation(nameof(OnUserLeft)))
-                .Select(x => x.EventArgs)
                 .Where(x => x != null);
 
             //OnEmoteOnly = TwitchExtensions.FromEventPattern<TwitchLib.Client.Events.OnEmoteOnlyArgs>(
@@ -78,14 +99,14 @@ namespace PolyhydraGames.Twitch.Services
             //    )
             //    .Do(x => logger.LogInformation(nameof(OnUserLeft)))
             //    .Where(x => x != null);
-
+             
         }
 
-        public void JoinChannel(string channelName) => _client.JoinChannel(channelName, true);
+        public Task JoinChannel(string channelName) => _client.JoinChannelAsync(channelName, true);
 
-        public bool Connect() => _client.Connect();
-        public void LeaveChannel(string channelName) => _client.LeaveChannel(channelName);
-        public void SendMessage(string channel, string message) => _client.SendMessage(channel, message);
+        public Task<bool> ConnectAsync() => _client.ConnectAsync(); 
+        public Task LeaveChannel(string channelName) => _client.LeaveChannelAsync(channelName);
+        public Task SendMessageAsync(string channel, string message) => _client.SendMessageAsync(channel, message);
 
         public void Initialize(ConnectionCredentials connectionCredentials) => _client.Initialize(connectionCredentials);
 
@@ -94,7 +115,7 @@ namespace PolyhydraGames.Twitch.Services
         /// <summary>
         /// On Client Connect
         /// </summary>
-        public IObservable<OnConnectedArgs> OnConnected { get; private init; }
+        public IObservable<OnConnectedEventArgs> OnConnected { get; private init; }
         public IObservable<OnMessageReceivedArgs> OnMessageReceived { get; private init; }
         public IObservable<OnWhisperReceivedArgs> OnWhisperReceived { get; private init; }
         public IObservable<OnNewSubscriberArgs> OnNewSubscriber { get; private init; }
@@ -105,7 +126,7 @@ namespace PolyhydraGames.Twitch.Services
         //public IObservable<OnVIPsReceivedArgs> OnVIPsReceived { get; private init; }
 
 
-
+        
 
     }
 }

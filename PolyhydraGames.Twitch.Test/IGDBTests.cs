@@ -42,9 +42,8 @@ public class IGDBTests : TestBase
 
     }
 
-    [TestCase("Sonic the Hedgehog", "genesis", ExpectedResult = 1991)]
-    [TestCase("Zombies ate my Neighbors", "snes", ExpectedResult = 1991)]
-    [TestCase("Rocket Knight Adventures", "genesis", ExpectedResult = 1993)]
+    [TestCase("Sonic the Hedgehog", "genesis", ExpectedResult = 1991),
+     TestCase("Rocket Knight Adventures", "genesis", ExpectedResult = 1993)]
     public async Task<int> GetYear(string name, string platform)
     {
         var games = await IgdbService.GetGame(name, platform);

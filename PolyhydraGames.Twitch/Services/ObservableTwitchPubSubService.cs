@@ -8,11 +8,13 @@ namespace PolyhydraGames.Twitch.Services
 {
     public class ObservableTwitchPubSubService : ITwitchPubSub
     {
-        private readonly TwitchPubSub _client; 
+        private readonly TwitchPubSub _client;
+        private readonly IApiSettings _authConfig;
 
-        public ObservableTwitchPubSubService(TwitchPubSub client, ILogger<ObservableTwitchPubSubService> log)
+        public ObservableTwitchPubSubService(TwitchPubSub client, ILogger<ObservableTwitchPubSubService> log, IApiSettings authConfig)
         {
-            _client = client; 
+            _client = client;
+            _authConfig = authConfig;
 
             OnChannelPointsRewardRedeemed = Observable.FromEventPattern<OnChannelPointsRewardRedeemedArgs>(_client, nameof(TwitchPubSub.OnChannelPointsRewardRedeemed))
                 .Do(x =>
@@ -38,7 +40,7 @@ namespace PolyhydraGames.Twitch.Services
                     log.LogInformation($"{x.ChannelId} {x.ChannelId} {x.Topic}");
                 else
                     log.LogError($"{x.ChannelId} {x.ChannelId} {x.Topic} {x.Response.Error}");
-
+                
             });
 
             //OnChannelPointsRewardRedeemed.Subscribe(x =>
@@ -58,17 +60,16 @@ namespace PolyhydraGames.Twitch.Services
 
         public IObservable<EventArgs> OnPubSubServiceConnected { get; }
 
-        public void Connect() => _client.Connect();
+        public Task ConnectAsync() => _client.ConnectAsync();
 
         /// <summary>
         /// This has to be called before any other methods will be listened on.
         /// </summary>
         /// <param name="channelId"></param>
-        public void RegisterChannel(int? channelId, string authcode)
+        public Task RegisterChannel(int? channelId, string authcode)
         {
-            _client.ListenToSubscriptions(channelId.ToString());
             _client.ListenToChannelPoints(channelId.ToString());
-            _client.SendTopics(authcode);
+            return _client.SendTopicsAsync(authcode);
         }
     }
 }

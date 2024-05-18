@@ -5,7 +5,7 @@ namespace PolyhydraGames.Twitch.Interfaces
     public interface ITwitchChat
     {
         public IObservable<OnJoinedChannelArgs> OnJoinedChannel { get; }
-        public IObservable<OnConnectedArgs> OnConnected { get; }
+        public IObservable<OnConnectedEventArgs> OnConnected { get; }
         public IObservable<OnMessageReceivedArgs> OnMessageReceived { get; }
         public IObservable<OnWhisperReceivedArgs> OnWhisperReceived { get; }
         public IObservable<OnNewSubscriberArgs> OnNewSubscriber { get; }

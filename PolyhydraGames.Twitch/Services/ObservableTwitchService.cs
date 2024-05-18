@@ -13,7 +13,8 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
     private ObservableTwitchPubSubService _pubSub;
     private readonly TwitchAPI _api;
     private readonly TwitchApiConfig _config;
-    private readonly IChannelRecordsCache _recordService; 
+    private readonly IChannelRecordsCache _recordService;
+    private readonly IStreamerService _streamerService;
     private readonly ILogger _logger;
     private readonly string _username;
     private readonly string _state;
@@ -42,8 +43,10 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
         OnRegistrationCompleted = _registrationCompleted.AsObservable();
 
         _config = apiConfig;
-        _recordService = recordService; 
+        _recordService = recordService;
+        _streamerService = streamerService;
         _chat = chat;
+
         _pubSub = pubSub;
         _api = api;
         _username = apiConfig.Username; //configuration 
@@ -64,7 +67,8 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
 
 
         _chat.OnJoinedChannel
-                .Subscribe(x=> _chat.SendMessage(x.Channel, $"Howdy {x.Channel}, hows it going? {x.BotUsername}"))
+                .Select(async x => await _chat.SendMessageAsync(x.Channel, $"Howdy {x.Channel}, hows it going? {x.BotUsername}"))
+                .Subscribe()
                 .AppendToDisposable(this);
         
         //Updates user details
@@ -74,13 +78,13 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
 
         //Processes requests
         _chat.OnMessageReceived
-            .Where(x => x.ChatMessage.Message.StartsWith('!'))
+            .Where(x => x.ChatMessage.Message.StartsWith("!"))
             .Select(TwitchExtensions.ToRequest)
             .Subscribe(Queue)
             .AppendToDisposable(this);
 
         _chat.OnWhisperReceived
-            .Where(x => x.WhisperMessage.Message.StartsWith('!'))
+            .Where(x => x.WhisperMessage.Message.StartsWith("!"))
             .Select(TwitchExtensions.ToRequest)
             .Subscribe(Queue)
             .AppendToDisposable(this);
@@ -88,7 +92,6 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
         _chat.OnUserJoined
             .Subscribe(x => _recordService.Update(x.ToJoinUpdate()))
             .AppendToDisposable(this);
-
         _chat.OnUserLeft
             .Subscribe(x => _recordService.Update(x.ToLeftUpdate()))
             .AppendToDisposable(this);
@@ -110,15 +113,14 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
 
         _joinedChannels.Remove(channelName);
         _joinedChannels.Add(channelName, new JoinedChannel(channelName));
-        _chat.JoinChannel(channelName);
-
+        await _chat.JoinChannel(channelName);
         try
         {
             if (streamer.TwitchChannelId == null)
             {
-                id = _api.Helix.Users.GetUsersAsync(logins: [channelName]).Result.Users[0].Id.ToInt();
+                id = _api.Helix.Users.GetUsersAsync(logins: new List<string> { channelName }).Result.Users[0].Id.ToInt();
             }
-            _pubSub.RegisterChannel(id, auth);
+            await _pubSub.RegisterChannel(id, auth);
         }
         catch (Exception ex)
         {
@@ -142,13 +144,11 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
 
         if (result.IsWhisper)
         {
-            //_api.Helix.EventSub.
-            //TODO: Fix this
-            //await _api.Helix.Chat.  SendWhisperAsync(_config.Username, result.TargetId, result.Message, false, _config.AccessToken);
+            await _api.Helix.Whispers.SendWhisperAsync(_config.Username, result.TargetId, result.Message, false, _config.AccessToken);
         }
         else
         {
-            _chat.SendMessage(result.Target, result.Message);
+            await _chat.SendMessageAsync(result.Target, result.Message);
         }
     }
 
@@ -174,9 +174,9 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
             if (result.AccessToken == null) return;
             _chat.Initialize(new ConnectionCredentials(_username, result.AccessToken));
 
-            _pubSub.Connect();
+            await _pubSub.ConnectAsync();
 
-            ConnectedState = _chat.Connect() ? ConnectionState.Connected : ConnectionState.CriticalFailure;
+            ConnectedState = await _chat.ConnectAsync() ? ConnectionState.Connected : ConnectionState.CriticalFailure;
             Log.LogInformation("Twitch: Authentication Completed.");
         }
         catch (Exception ex)
