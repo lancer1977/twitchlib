@@ -1,5 +1,5 @@
 # Starter pipeline
-name: 1.0.4.$(rev:r)
+name: 1.0.5.$(rev:r)
 variables: 
 - name: Project.Path
   value: '**/PolyhydraGames.Twitch.csproj'
