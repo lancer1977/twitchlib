@@ -1,0 +1,7 @@
+{
+    "Path": "\/userdata\/roms\/snes\/a\/Arcade's Greatest Hits - The Atari Collection 1 (USA).smc",
+    "System": "snes",
+    "Start": "gameStart",
+    "Emulator": "libretro",
+    "Core": "snes9x"
+}

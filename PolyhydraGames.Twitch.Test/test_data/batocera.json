@@ -1,0 +1,32 @@
+ [
+      {
+        "path": "/path/to/Super Mario Bros (U).nes",
+        "system": "Nintendo",
+        "start": "launch_command1",
+        "emulator": "NES",
+        "core": "Nestopia"
+      },
+      {
+        "path": "/path/to/Sonic The Hedgehog (U).gen",
+        "system": "Sega",
+        "start": "launch_command2",
+        "emulator": "Genesis",
+        "core": "Genesis Plus GX"
+      },
+      {
+        "path": "/path/to/Zelda Link To The Past (U).smc",
+        "system": "Nintendo",
+        "start": "launch_command3",
+        "emulator": "SNES",
+        "core": "bsnes"
+      },
+      {
+        "path": "/path/to/Donkey Kong (U).coleco",
+        "system": "Coleco",
+        "start": "launch_command4",
+        "emulator": "Colecovision",
+        "core": "BlueMSX"
+      }
+    ]
+  
+  

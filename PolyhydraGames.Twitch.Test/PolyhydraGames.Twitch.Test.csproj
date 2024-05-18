@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+    <None Remove="rocketknight.json" />
+    <None Remove="test_data\alien_crush.lpl" />
+    <None Remove="test_data\alien_syndrome.lpl" />
+    <None Remove="test_data\batman_forever.lpl" />
+    <None Remove="test_data\batocera.json" />
+    <None Remove="test_data\content_history.lpl" />
+    <None Remove="test_data\lots.lpl" />
+    <None Remove="test_data\randomroms_as_batocera.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test_data\alien_crush.lpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test_data\alien_syndrome.lpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test_data\batman_forever.lpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test_data\batocera.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test_data\content_history.lpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test_data\lots.lpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test_data\randomroms_as_batocera.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+
+    <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="Moq.AutoMock" Version="3.5.0" />
+    <PackageReference Include="NUnit" Version="4.1.0" /> 
+    <PackageReference Include="coverlet.collector" Version="6.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference> 
+    <PackageReference Include="PolyhydraGames.Core.Test" Version="1.0.0.15" />
+  </ItemGroup>
+
+ 
+  <ItemGroup>
+    <Content Include="rocketknight.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+ 
+  <ItemGroup>
+    <ProjectReference Include="..\PolyhydraGames.Twitch\PolyhydraGames.Twitch.csproj" />
+  </ItemGroup>
+
+ 
+
+</Project>

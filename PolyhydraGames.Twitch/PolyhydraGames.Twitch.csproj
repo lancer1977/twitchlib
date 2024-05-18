@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<UserSecretsId>ea7d4395-85d1-4474-9317-1162c7609231</UserSecretsId>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
+
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+		<PackageReference Include="PolyhydraGames.Api.SystemDefinitions" Version="1.0.2.13" />
+		<PackageReference Include="PolyhydraGames.Core.Global" Version="1.0.3.6" />
+		<PackageReference Include="PolyhydraGames.Core.Models" Version="1.0.0.23" />
+		<PackageReference Include="PolyhydraGames.Extensions" Version="2.1.1.51" />
+		<PackageReference Include="ReactiveUI" Version="20.0.1" />
+		<PackageReference Include="TwitchLib" Version="3.5.3" />
+		<PackageReference Include="OAuth.Core" Version="1.0.3.29" />  
+	</ItemGroup>
+
+
+
+
+
+
+</Project>

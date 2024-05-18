@@ -1,0 +1,159 @@
+ [
+          {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Alien Crush (USA).pce",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\mednafen_pce_libretro.dll",
+      "core_name": "NEC - PC Engine / SuperGrafx / CD (Beetle PCE)",
+      "crc32": "",
+      "db_name": ""
+    } ,
+        {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Alien Syndrome (UE) [!].sms",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\genesis_plus_gx_libretro.dll",
+      "core_name": "Sega - MS/GG/MD/CD (Genesis Plus GX)",
+      "crc32": "",
+      "db_name": ""
+    },
+        {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Batman Forever (U) [!].smc",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\snes9x_libretro.dll",
+      "core_name": "Nintendo - SNES / SFC (Snes9x)",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Bonk's Revenge (USA).pce",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\mednafen_pce_libretro.dll",
+      "core_name": "NEC - PC Engine / SuperGrafx / CD (Beetle PCE)",
+      "crc32": "",
+      "db_name": ""
+    },
+     
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Mighty Max.smd",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\genesis_plus_gx_libretro.dll",
+      "core_name": "Sega - MS/GG/MD/CD (Genesis Plus GX)",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "U:\\roms\\segacd\\Final Fight CD (USA).chd",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\genesis_plus_gx_libretro.dll",
+      "core_name": "Sega - MS/GG/MD/CD (Genesis Plus GX)",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Final Fight 2 (U).smc",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\snes9x_libretro.dll",
+      "core_name": "Nintendo - SNES / SFC (Snes9x)",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Bubble Bobble (UE) [!].sms",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\genesis_plus_gx_libretro.dll",
+      "core_name": "Sega - MS/GG/MD/CD (Genesis Plus GX)",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\James Buster Douglas Knock Out Boxing (U) [b1].bin",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\genesis_plus_gx_libretro.dll",
+      "core_name": "Sega - MS/GG/MD/CD (Genesis Plus GX)",
+      "crc32": "",
+      "db_name": ""
+    }, 
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Mighty Final Fight (USA).nes",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\mesen_libretro.dll",
+      "core_name": "Nintendo - NES / Famicom (Mesen)",
+      "crc32": "",
+      "db_name": ""
+    },
+     
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Alisia Dragoon.smd",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\genesis_plus_gx_libretro.dll",
+      "core_name": "Sega - MS/GG/MD/CD (Genesis Plus GX)",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\ALADDIN.SMD",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\genesis_plus_gx_libretro.dll",
+      "core_name": "Sega - MS/GG/MD/CD (Genesis Plus GX)",
+      "crc32": "",
+      "db_name": ""
+    },
+     
+    {
+      "path": "U:\\roms\\dreamcast\\Armada v1.000 (1999)(Metro3D)(US)[!].chd",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\flycast_libretro.dll",
+      "core_name": "Sega - Dreamcast/Naomi (Flycast)",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "U:\\roms\\segacd\\AH-3 Thunderstrike (USA).chd",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\genesis_plus_gx_libretro.dll",
+      "core_name": "Sega - MS/GG/MD/CD (Genesis Plus GX)",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Mario Bros. (World).nes",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\mesen_libretro.dll",
+      "core_name": "Nintendo - NES / Famicom (Mesen)",
+      "crc32": "",
+      "db_name": ""
+    },
+        
+    {
+      "path": "U:\\roms\\atarijaguar\\Alien vs Predator (World).jag",
+      "label": "Alien vs Predator (World)",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\virtualjaguar_libretro.dll",
+      "core_name": "Atari - Jaguar (Virtual Jaguar)",
+      "crc32": "DC187F82|crc",
+      "db_name": "Atari - Jaguar.lpl"
+    },
+    {
+      "path": "U:\\roms\\3do\\Club 3DO - Station Invasion (USA).iso",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\opera_libretro.dll",
+      "core_name": "The 3DO Company - 3DO (Opera)",
+      "crc32": "",
+      "db_name": ""
+    },
+    {
+      "path": "U:\\roms\\saturn\\Baku Baku Animal (U).chd",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\yabasanshiro_libretro.dll",
+      "core_name": "Sega - Saturn (YabaSanshiro)",
+      "crc32": "",
+      "db_name": ""
+    },
+     
+    {
+      "path": "D:\\LaunchBox\\ThirdParty\\7-Zip\\Temp\\Adventures of Lolo 2 (USA).nes",
+      "label": "",
+      "core_path": "D:\\LaunchBox\\Emulators\\RetroArch\\cores\\mesen_libretro.dll",
+      "core_name": "Nintendo - NES / Famicom (Mesen)",
+      "crc32": "",
+      "db_name": ""
+    }
+  ]

@@ -1,0 +1,7 @@
+﻿{
+  "start": "gameStart",
+  "system": "genesis",
+  "emulator": "retroarch",
+  "core": "cores/genesis_plus_gx_libretro.dll",
+  "path": "D:/LaunchBox/ThirdParty/7-Zip/Temp/Real Monsters.smd"
+} 

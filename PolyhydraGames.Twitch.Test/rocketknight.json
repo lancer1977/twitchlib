@@ -1,0 +1,7 @@
+{
+    "Path": "/userdata/roms/snes/Rocket Knight Adventures (U).smd",
+    "System": "genesis",
+    "Start": "gameStart",
+    "Emulator": "libretro",
+    "Core": "snes9x"
+}
