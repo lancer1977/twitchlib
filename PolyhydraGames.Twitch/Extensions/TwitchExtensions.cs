@@ -3,10 +3,8 @@ using System.Diagnostics;
 using PolyhydraGames.Streaming.Interfaces;
 using PolyhydraGames.Streaming.Interfaces.Enums;
 using System.Reactive.Linq;
-using System.Reactive.Subjects;
 using OAuth.Core.Bot;
 using TwitchLib.Client.Events;
-using TwitchLib.Communication.Events;
 using TwitchLib.PubSub.Events;
 
 namespace PolyhydraGames.Twitch.Extensions;

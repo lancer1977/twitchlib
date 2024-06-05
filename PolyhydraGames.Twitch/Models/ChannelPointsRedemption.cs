@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text.Json.Serialization;
-using TwitchLib.PubSub.Events;
+﻿using System.Text.Json.Serialization;
 
 namespace PolyhydraGames.Twitch.Models
 {

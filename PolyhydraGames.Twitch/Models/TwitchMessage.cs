@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using PolyhydraGames.Streaming.Interfaces;
+﻿using PolyhydraGames.Streaming.Interfaces;
 using PolyhydraGames.Streaming.Interfaces.Enums;
 
 namespace PolyhydraGames.Twitch.Models;

@@ -1,6 +1,4 @@
-﻿using OAuth.Core.Services;
-
-namespace PolyhydraGames.Twitch.Configs;
+﻿namespace PolyhydraGames.Twitch.Configs;
 
 
 public class TwitchApiConfig : ITwitchClientConfig, INotifyPropertyChanged
