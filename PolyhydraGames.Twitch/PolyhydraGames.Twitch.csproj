@@ -12,7 +12,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
 		<PackageReference Include="PolyhydraGames.Api.SystemDefinitions" Version="1.0.2.13" />
-		<PackageReference Include="PolyhydraGames.Core.Global" Version="1.0.3.6" />
+		<PackageReference Include="PolyhydraGames.Core.Global" Version="1.0.3.7" />
 		<PackageReference Include="PolyhydraGames.Core.Models" Version="1.0.0.23" />
 		<PackageReference Include="PolyhydraGames.Extensions" Version="2.1.1.51" />
 		<PackageReference Include="ReactiveUI" Version="20.1.1" />
