@@ -65,6 +65,11 @@ namespace PolyhydraGames.Twitch.Services
                 .Select(x => x.EventArgs)
                 .Where(x => x != null);
 
+            OnRaided = Observable.FromEventPattern<OnRaidNotificationArgs>(_client, nameof(TwitchClient.OnRaidNotification))
+                .Do(x => logger.LogInformation(nameof(OnRaided)))
+                .Select(x => x.EventArgs)
+                .Where(x => x != null);
+
             //OnEmoteOnly = TwitchExtensions.FromEventPattern<TwitchLib.Client.Events.OnEmoteOnlyArgs>(
             //        handler => _client.OnEmoteOnly += handler,
             //        handler => _client.OnEmoteOnly -= handler
@@ -101,6 +106,7 @@ namespace PolyhydraGames.Twitch.Services
         public IObservable<OnAnnouncementArgs> OnAnnouncement { get; private init; }
         public IObservable<OnUserJoinedArgs> OnUserJoined { get; private init; }
         public IObservable<OnUserLeftArgs> OnUserLeft { get; private init; }
+        public IObservable<OnRaidNotificationArgs> OnRaided { get; private init; }
         //public IObservable<OnEmoteOnlyArgs> OnEmoteOnly { get; private init; }
         //public IObservable<OnVIPsReceivedArgs> OnVIPsReceived { get; private init; }
 

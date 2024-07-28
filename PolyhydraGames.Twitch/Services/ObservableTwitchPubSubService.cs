@@ -1,6 +1,7 @@
 ﻿
 using System.Reactive.Linq;
 using PolyhydraGames.Twitch.Extensions;
+using TwitchLib.Client.Events;
 using TwitchLib.PubSub;
 using TwitchLib.PubSub.Events;
 
@@ -26,9 +27,10 @@ namespace PolyhydraGames.Twitch.Services
             OnStreamUp = TwitchExtensions.FromEventPattern<OnStreamUpArgs>(_client, nameof(TwitchPubSub.OnStreamUp), log);
             OnStreamDown = TwitchExtensions.FromEventPattern<OnStreamDownArgs>(_client, nameof(TwitchPubSub.OnStreamDown), log);
             OnCommercial = TwitchExtensions.FromEventPattern<OnCommercialArgs>(_client, nameof(TwitchPubSub.OnCommercial), log);
-            OnPubSubServiceConnected = TwitchExtensions.FromEventPattern<EventArgs>(_client, nameof(TwitchPubSub.OnPubSubServiceConnected), log);
-
-            OnPubSubServiceConnected.Subscribe(x =>
+            OnConnected = TwitchExtensions.FromEventPattern<EventArgs>(_client, nameof(TwitchPubSub.OnPubSubServiceConnected), log);
+            OnFollow = TwitchExtensions.FromEventPattern<OnFollowArgs>(_client, nameof(TwitchPubSub.OnFollow), log);
+            OnRaidStart = TwitchExtensions.FromEventPattern<OnRaidUpdateV2Args>(_client, nameof(TwitchPubSub.OnRaidUpdateV2), log);
+            OnConnected.Subscribe(x =>
             {
                 log.LogInformation("PubSub Connected");
             });
@@ -56,7 +58,11 @@ namespace PolyhydraGames.Twitch.Services
 
         public IObservable<OnListenResponseArgs> OnListenResponse { get; }
 
-        public IObservable<EventArgs> OnPubSubServiceConnected { get; }
+        public IObservable<EventArgs> OnConnected { get; }
+        public IObservable<OnFollowArgs> OnFollow { get; }
+        public IObservable<OnRaidUpdateV2Args> OnRaidStart { get; }
+        
+
 
         public void Connect() => _client.Connect();
 
@@ -66,8 +72,16 @@ namespace PolyhydraGames.Twitch.Services
         /// <param name="channelId"></param>
         public void RegisterChannel(int? channelId, string authcode)
         {
-            _client.ListenToSubscriptions(channelId.ToString());
-            _client.ListenToChannelPoints(channelId.ToString());
+            if (string.IsNullOrEmpty(authcode)) throw new ArgumentNullException(nameof(authcode));
+            if (channelId == null) throw new ArgumentNullException(nameof(channelId));
+         
+            var channel = channelId.ToString();
+            _client.ListenToSubscriptions(channel);
+            _client.ListenToChannelPoints(channel);
+            _client.ListenToFollows(channel);
+            _client.ListenToBitsEventsV2(channel);
+            _client.ListenToRaid(channel);
+            _client.ListenToPredictions(channel); 
             _client.SendTopics(authcode);
         }
     }
