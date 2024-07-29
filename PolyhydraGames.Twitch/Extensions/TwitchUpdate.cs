@@ -1,6 +1,4 @@
-﻿using PolyhydraGames.Streaming.Interfaces;
-
-namespace PolyhydraGames.Twitch.Extensions;
+﻿namespace PolyhydraGames.Twitch.Extensions;
 
 public class TwitchUpdate : ITwitchUpdate
 { 

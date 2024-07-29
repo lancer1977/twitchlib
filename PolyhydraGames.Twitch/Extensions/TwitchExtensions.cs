@@ -1,9 +1,5 @@
 ﻿#nullable enable
 using System.Diagnostics;
-using PolyhydraGames.Streaming.Interfaces;
-using PolyhydraGames.Streaming.Interfaces.Enums;
-using System.Reactive.Linq;
-using OAuth.Core.Bot;
 using TwitchLib.Client.Events;
 using TwitchLib.PubSub.Events;
 

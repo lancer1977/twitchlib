@@ -1,7 +1,4 @@
-﻿using PolyhydraGames.Streaming.Interfaces;
-using PolyhydraGames.Streaming.Interfaces.Enums;
-
-namespace PolyhydraGames.Twitch.Models;
+﻿namespace PolyhydraGames.Twitch.Models;
 
 
 public class TwitchMessage : IStreamMessage

@@ -1,6 +1,4 @@
-﻿using System.Reactive.Linq;
-using PolyhydraGames.Twitch.Extensions;
-using TwitchLib.Client;
+﻿using TwitchLib.Client;
 using TwitchLib.Client.Events;
 
 namespace PolyhydraGames.Twitch.Services
