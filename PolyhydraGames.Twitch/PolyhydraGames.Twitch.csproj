@@ -17,7 +17,7 @@
 		<PackageReference Include="PolyhydraGames.Extensions" Version="2.1.1.51" />
 		<PackageReference Include="ReactiveUI" Version="20.1.1" />
 		<PackageReference Include="TwitchLib" Version="3.5.3" />
-		<PackageReference Include="OAuth.Core" Version="1.0.3.32" />  
+		<PackageReference Include="OAuth.Core" Version="1.0.3.33" />  
 	</ItemGroup>
 
 
