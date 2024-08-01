@@ -10,5 +10,5 @@ public class TwitchUpdate : ITwitchUpdate
     public bool? IsModerator { get; set; }
     public bool IsOnline { get; set; }
     public int? Bits { get; set; }
-    public int Type { get; set; }
+    public UpdateType Type { get; set; }
 }
