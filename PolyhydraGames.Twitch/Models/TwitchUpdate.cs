@@ -1,7 +1,7 @@
-﻿namespace PolyhydraGames.Twitch.Extensions;
+﻿namespace PolyhydraGames.Twitch.Models;
 
 public class TwitchUpdate : ITwitchUpdate
-{ 
+{
     public int? Id { get; set; }
     public string Name { get; set; }
     public string ChannelTarget { get; set; }
@@ -10,4 +10,5 @@ public class TwitchUpdate : ITwitchUpdate
     public bool? IsModerator { get; set; }
     public bool IsOnline { get; set; }
     public int? Bits { get; set; }
+    public int Type { get; set; }
 }
