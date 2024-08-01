@@ -1,4 +1,6 @@
-﻿namespace PolyhydraGames.Twitch.Services;
+﻿using PolyhydraGames.Core.Interfaces;
+
+namespace PolyhydraGames.Twitch.Services;
 
 public class TwitchWebUrl(IConfiguration config) : ITwitchWebUrl
 {

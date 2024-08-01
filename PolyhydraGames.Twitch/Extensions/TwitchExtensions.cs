@@ -74,7 +74,8 @@ public static class TwitchExtensions
         {
             ChannelTarget = args.Channel,
             Name = args.Username,
-            IsOnline = true
+            IsOnline = true,
+            Type = UpdateType.Join
 
         };
     }
@@ -85,7 +86,8 @@ public static class TwitchExtensions
         {
             ChannelTarget = args.Channel,
             Name = args.Username,
-            IsOnline = false
+            IsOnline = false,
+            Type = UpdateType.Leave
         };
     }
     public static ITwitchUpdate ToUpdate(this ChatMessage message)
@@ -102,6 +104,7 @@ public static class TwitchExtensions
             Id = result == 0 ? null : result,
             //IsFollower = message.IsFollower,
             IsOnline = true,
+            Type = UpdateType.Message
         };
     }
 
