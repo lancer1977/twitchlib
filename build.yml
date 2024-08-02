@@ -11,7 +11,7 @@ trigger:
     - refs/heads/main
   paths:
     include:
-    - Twitch
+    - PolyhydraGames.Twitch
 
 jobs:
 - job: Phase_1 
