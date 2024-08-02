@@ -9,9 +9,6 @@ trigger:
   branches:
     include:
     - refs/heads/main
-  paths:
-    include:
-    - PolyhydraGames.Twitch
 
 jobs:
 - job: Phase_1 
