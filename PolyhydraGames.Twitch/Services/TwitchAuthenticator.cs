@@ -1,12 +1,14 @@
-﻿namespace PolyhydraGames.Twitch.Services;
+﻿using TwitchLib.Api.Helix;
 
-public class TwitchAuthenticator : ITwitchAuthenticator
+namespace PolyhydraGames.Twitch.Services;
+
+public class StreamerTwitchService : IStreamerTwitchService
 {
     private readonly TwitchAPI _api;
     private readonly TwitchApiConfig _apiconfig;
-    private readonly ILogger<TwitchAuthenticator> _log;
+    private readonly ILogger<StreamerTwitchService> _log;
 
-    public TwitchAuthenticator(TwitchApiConfig apiconfig, ILogger<TwitchAuthenticator> log)
+    public StreamerTwitchService(TwitchApiConfig apiconfig, ILogger<StreamerTwitchService> log)
     { 
         _api = new TwitchAPI(settings:apiconfig);
         _apiconfig = apiconfig;
@@ -51,7 +53,10 @@ public class TwitchAuthenticator : ITwitchAuthenticator
     /// <returns></returns>
     public async Task<User> GetUser()
     {
+        
         var result = await _api.Helix.Users.GetUsersAsync();
         return result.Users[0];
     }
+
+    public Helix APIs => _api.Helix;
 }

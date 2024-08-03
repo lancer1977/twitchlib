@@ -1,9 +1,12 @@
-﻿namespace PolyhydraGames.Twitch.Interfaces;
+﻿using TwitchLib.Api.Helix;
 
-public interface ITwitchAuthenticator
+namespace PolyhydraGames.Twitch.Interfaces;
+
+public interface IStreamerTwitchService
 {
     public string GetAuthorizationUrl();
 
     public Task<AuthCodeResponse> ProcessCallback(string code);
     public Task<User> GetUser();
+    public Helix APIs { get; }
 }
