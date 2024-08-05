@@ -4,14 +4,15 @@ namespace PolyhydraGames.Twitch.Services;
 
 public class StreamerTwitchService : IStreamerTwitchService
 {
-    private readonly TwitchAPI _api;
-    private readonly TwitchApiConfig _apiconfig;
+    private readonly TwitchAPI _api; 
     private readonly ILogger<StreamerTwitchService> _log;
-
+    private readonly TwitchApiConfig _settings;
+    public Dictionary<int, ExtendedViewerDetails> ViewerCache { get; } = new();
     public StreamerTwitchService(TwitchApiConfig apiconfig, ILogger<StreamerTwitchService> log)
-    { 
-        _api = new TwitchAPI(settings:apiconfig);
-        _apiconfig = apiconfig;
+    {
+    
+       _settings = apiconfig.GetCopy();
+        _api = new TwitchAPI(settings: _settings); 
         _log = log;
     }
 
@@ -22,7 +23,7 @@ public class StreamerTwitchService : IStreamerTwitchService
     public string GetAuthorizationUrl()
     {
         //state: _state,
-        var code = _api.Auth.GetAuthorizationCodeUrl(_apiconfig.UserRedirectUrl, _apiconfig.Scopes,  clientId: _apiconfig.ClientId);
+        var code = _api.Auth.GetAuthorizationCodeUrl(_settings.UserRedirectUrl, _settings.Scopes,  clientId: _settings.ClientId);
         code = code.InjectScope("whispers:read+whispers:edit+channel:read:redemptions+");
         return code;
     }
@@ -36,9 +37,10 @@ public class StreamerTwitchService : IStreamerTwitchService
     {
         try
         {
-            var response =  await _api.Auth.GetAccessTokenFromCodeAsync(code, _apiconfig.Secret, _apiconfig.UserRedirectUrl, _apiconfig.ClientId);
+            var response =  await _api.Auth.GetAccessTokenFromCodeAsync(code, _settings.Secret, _settings.UserRedirectUrl, _settings.ClientId);
             _api.Settings.AccessToken = response.AccessToken;
-            _api.Settings.ClientId = _apiconfig.ClientId;
+            _api.Settings.ClientId = _settings.ClientId;
+            _settings.AccessToken = response.AccessToken;
             return response;
         }
         catch (Exception ex)
@@ -59,4 +61,13 @@ public class StreamerTwitchService : IStreamerTwitchService
     }
 
     public Helix APIs => _api.Helix;
+}
+
+public class ExtendedViewerDetails
+{
+    private readonly IViewer _viewer; 
+    public ExtendedViewerDetails(IViewer viewer)
+    {
+        _viewer = viewer;
+    }
 }

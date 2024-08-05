@@ -44,13 +44,34 @@ public class TwitchApiConfig : ITwitchClientConfig, INotifyPropertyChanged
         //Scopes = string.Join(" ", scopes);
         AuthorizationEndpoint = "https://id.twitch.tv/oauth2/authorize";
         TokenEndpoint = "https://id.twitch.tv/oauth2/token"; //	Token URL 
+        if (config == null) return;
         RedirectUrl = config["Twitch:Redirect"];
         Secret = config["Twitch:Secret"];
         ClientId = config["Twitch:ClientId"];
         Username = config["Twitch:BotName"];
         State = config["Twitch:State"];
         UserRedirectUrl = config["Twitch:UserRedirect"];
+    }
 
+    public  TwitchApiConfig GetCopy()
+    {
+        var config = new TwitchApiConfig(null);
+        config.RedirectUrl = this.RedirectUrl;
+        config.Secret = this.Secret;
+        config.ClientId = this.ClientId;
+        config.Username = this.Username;
+        config.State = this.State;
+        config.UserRedirectUrl = this.UserRedirectUrl;
+
+
+
+
+        return config;
+        //Secret = config["Twitch:Secret"];
+        //ClientId = config["Twitch:ClientId"];
+        //Username = config["Twitch:BotName"];
+        //State = config["Twitch:State"];
+        //UserRedirectUrl = config["Twitch:UserRedirect"];
     }
 
     public List<AuthScopes> Scopes
@@ -64,8 +85,8 @@ public class TwitchApiConfig : ITwitchClientConfig, INotifyPropertyChanged
         }
     }
 
-    public string Username { get; }
-    public string State { get; }
+    public string Username { get; private set; }
+    public string State { get; private set; }
 
     public string UserRedirectUrl
     {
