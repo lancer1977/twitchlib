@@ -106,6 +106,10 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
         var id = streamer.TwitchChannelId;
         var auth = streamer.TwitchOAuth;
         Log.LogTrace($"Twitch: Request Joining {channelName}");
+        if (string.IsNullOrEmpty(channelName))
+        {
+            return;
+        }
         if (!Connected) return;
 
         _joinedChannels.Remove(channelName);
@@ -118,7 +122,11 @@ public class ObservableTwitchService : QueueService<ObservableTwitchService>, IA
             {
                 id = _api.Helix.Users.GetUsersAsync(logins: [channelName]).Result.Users[0].Id.ToInt();
             }
-            _pubSub.RegisterChannel(id, auth);
+
+            if (!string.IsNullOrEmpty(auth))
+            {
+                _pubSub.RegisterChannel(id, auth);
+            }
         }
         catch (Exception ex)
         {
